@@ -33,10 +33,22 @@ public class ProductPage {
     @FindBy(className = "product_sort_container")
     private WebElement sortComponent;
 
+    @FindBy(xpath = "(//div[@class='inventory_item_price'])[1]")
+    private WebElement firstItemLowPrice;
+
+    @FindBy(xpath = "(//div[@class='inventory_item_price'])[6]")
+    private WebElement lastItemHighPrice;
+
+    @FindBy(xpath = "//div[@class='inventory_item_price']")
+    private List<WebElement> allItemPrices;
+
+    @FindBy(id = "item_2_title_link")
+    private WebElement titleOfFirstItem;
+
+
+
     public void verifyAbout(){
         menuLink.click();
-
-
 
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -79,6 +91,33 @@ public class ProductPage {
 
 
     public void verifyFirstAndLastItems () {
+        String[] splitFirstLowPrice = firstItemLowPrice.getText().trim().split("\\$");
+        Double newLowItemPrice = Double.parseDouble(splitFirstLowPrice[1]);
+        Assert.assertEquals(7.99 , newLowItemPrice, "First item price does not match");
+
+        String newValue = lastItemHighPrice.getText().trim().replace("$", "");
+        double newLastItemPrice = Double.parseDouble(newValue);
+        Assert.assertEquals(49.99, newLastItemPrice, "Last item price does not match");
+
+
+
+    }
+
+
+    public void verifyAllItemPrice() {
+
+        for (int i = 0; i < allItemPrices.size(); i++) {
+            String splitAllItemPrices = allItemPrices.get(i).getText().trim().replace("$", "");
+            double newValueOfAllItem = Double.parseDouble(splitAllItemPrices);
+            System.out.println(newValueOfAllItem);
+
+        }
+    }
+
+        public void verifyTitle(){
+        Assert.assertTrue(titleOfFirstItem.isDisplayed(), "TITLE OF FIRST ITEM IS THERE");
+            titleOfFirstItem.click();
+        }
 
 
     }
@@ -88,4 +127,10 @@ public class ProductPage {
 
 
 
-}
+
+
+
+
+
+
+
