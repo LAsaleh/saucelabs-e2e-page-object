@@ -1,5 +1,6 @@
 package com.academy.techcenture.saucelabs.pages;
 
+import com.academy.techcenture.saucelabs.config.ConfigReader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.http.netty.NettyClient;
@@ -7,6 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Factory;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class LoginPage {
   //  i need to store the web elements.
@@ -39,10 +43,13 @@ public class LoginPage {
     public void login(){
         Assert.assertTrue(loginLogo.isDisplayed());
         Assert.assertTrue(botImg.isDisplayed());
-        userNameInput.sendKeys("standard_user");
-        passwordInput.sendKeys("secret_sauce");
+
+        userNameInput.sendKeys(ConfigReader.getProperty("userName"));
+        passwordInput.sendKeys(ConfigReader.getProperty("password"));
+
         Assert.assertTrue(loginBtn.isEnabled());
         loginBtn.click();
 
+        new SimpleDateFormat("99/99/9999").format(Calendar.getInstance().getTime());
     }
 }

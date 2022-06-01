@@ -19,7 +19,9 @@ public class Driver {
 
     }
 
-   public static WebDriver getDriver(String browser){
+   public static WebDriver getDriver(){
+
+        String browser = ConfigReader.getProperty("browser");
 
        switch (browser){
            case "chrome":
@@ -45,8 +47,8 @@ public class Driver {
        }
 
        if (driver != null){
-           driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
-           driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+           driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Long.parseLong(ConfigReader.getProperty("pageLoadTime"))));
+           driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Long.parseLong(ConfigReader.getProperty("implicitWaits"))));
            return driver;
        }
 

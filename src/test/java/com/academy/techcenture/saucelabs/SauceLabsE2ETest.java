@@ -1,5 +1,6 @@
 package com.academy.techcenture.saucelabs;
 
+import com.academy.techcenture.saucelabs.config.ConfigReader;
 import com.academy.techcenture.saucelabs.config.Driver;
 import com.academy.techcenture.saucelabs.pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -19,8 +20,8 @@ public class SauceLabsE2ETest {
 
     @BeforeMethod
     public void setUp() {
-        driver = Driver.getDriver("chrome");
-        driver.get("https://www.saucedemo.com/");
+        driver = Driver.getDriver();
+        driver.get(ConfigReader.getProperty("URL"));
 
     }
 
