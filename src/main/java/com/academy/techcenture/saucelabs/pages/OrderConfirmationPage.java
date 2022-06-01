@@ -55,11 +55,14 @@ public class OrderConfirmationPage {
 
     public void checkOutConfirmation(){
         Assert.assertTrue(checkOutOverViewHeader.isDisplayed());
+
         Assert.assertTrue(paymentInfo.isDisplayed());
         String[] splitNumber = confirmationNumber.getText().split("#");
         Assert.assertEquals(splitNumber[1], "31337");
+
         Assert.assertTrue(shippingInfo.isDisplayed());
         Assert.assertEquals(shippingInformationTxt.getText(), "FREE PONY EXPRESS DELIVERY!");
+
         String[] theItemTotal = itemTotal.getText().split("\\$");
         double parseTheItemTotal = Double.parseDouble(theItemTotal[1]);
 

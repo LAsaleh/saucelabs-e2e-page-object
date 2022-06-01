@@ -94,8 +94,12 @@ public class ProductPage {
         String[] splitFirstLowPrice = firstItemLowPrice.getText().trim().split("\\$");
         Double newLowItemPrice = Double.parseDouble(splitFirstLowPrice[1]);
         Assert.assertEquals(7.99 , newLowItemPrice, "First item price does not match");
+        //Assert.assertionEquals(firstItemLowPrice.get(0).getText().trim(), "$7.99");
 
         String newValue = lastItemHighPrice.getText().trim().replace("$", "");
+        //Assert.assertionEquals(lastItemLowPrice.get(lastItemPrice.size()-1).getText().trim(), "$49.99");
+
+
         double newLastItemPrice = Double.parseDouble(newValue);
         Assert.assertEquals(49.99, newLastItemPrice, "Last item price does not match");
 

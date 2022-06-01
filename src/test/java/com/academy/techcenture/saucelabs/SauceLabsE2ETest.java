@@ -1,5 +1,6 @@
 package com.academy.techcenture.saucelabs;
 
+import com.academy.techcenture.saucelabs.config.Driver;
 import com.academy.techcenture.saucelabs.pages.*;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -18,11 +19,7 @@ public class SauceLabsE2ETest {
 
     @BeforeMethod
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        this.driver = new ChromeDriver();
-        this.driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(15));
-        this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-
+        driver = Driver.getDriver("chrome");
         driver.get("https://www.saucedemo.com/");
 
     }
